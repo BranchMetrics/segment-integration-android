@@ -51,11 +51,12 @@ public class TuneIntegration extends Integration<Tune> {
         this.conversionKey = conversionKey;
         this.turnOnTMA = turnOnTMA;
         this.tune = Tune.init(context, advertiserId, conversionKey, turnOnTMA);
-        logger.verbose("Tune initialized.");
+        logger.verbose("TuneIntegration initialized.");
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
+        logger.verbose("TuneIntegration onActivityStarted");
         if (turnOnTMA) {
             TuneActivity.onStart(activity);
         }
@@ -63,7 +64,7 @@ public class TuneIntegration extends Integration<Tune> {
 
     @Override
     public void onActivityResumed(Activity activity) {
-        logger.verbose("onActivityResumed: Calling Tune measureSession");
+        logger.verbose("TuneIntegration onActivityResumed: Calling Tune measureSession");
         if (turnOnTMA) {
             TuneActivity.onResume(activity);
         }
@@ -73,6 +74,7 @@ public class TuneIntegration extends Integration<Tune> {
 
     @Override
     public void onActivityStopped(Activity activity) {
+        logger.verbose("TuneIntegration onActivityStopped");
         if (turnOnTMA) {
             TuneActivity.onStop(activity);
         }
@@ -84,7 +86,7 @@ public class TuneIntegration extends Integration<Tune> {
     // https://segment.com/docs/spec/.
     @Override
     public void identify(IdentifyPayload identify) {
-        logger.verbose("identify: Setting Tune user identifiers");
+        logger.verbose("TuneIntegration identify: Setting Tune user identifiers");
         tune.setUserId(identify.userId());
         tune.setPhoneNumber(identify.traits().phone());
         tune.setUserEmail(identify.traits().email());
@@ -93,7 +95,7 @@ public class TuneIntegration extends Integration<Tune> {
 
     @Override
     public void track(TrackPayload track) {
-        logger.verbose("track: Calling Tune measureEvent with %s", track.event());
+        logger.verbose("TuneIntegration track: Calling Tune measureEvent with %s", track.event());
         TuneEvent event = new TuneEvent(track.event());
         event.withRevenue(track.properties().revenue());
         event.withCurrencyCode(track.properties().currency());
@@ -106,7 +108,7 @@ public class TuneIntegration extends Integration<Tune> {
     // Reset is when you clear out any local user data.
     @Override
     public void reset() {
-        logger.verbose("reset: Clearing Tune user identifiers");
+        logger.verbose("TuneIntegration reset: Clearing Tune user identifiers");
         tune.setUserId(null);
         tune.setPhoneNumber(null);
         tune.setUserEmail(null);
