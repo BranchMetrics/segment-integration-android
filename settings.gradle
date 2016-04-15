@@ -1,0 +1,2 @@
+include ':TuneIntegration', ':TuneMarketingConsoleSDK'
+project(':TuneMarketingConsoleSDK').projectDir = new File(settingsDir, '../android-sdk/sdk-android/TuneMarketingConsoleSDK')
