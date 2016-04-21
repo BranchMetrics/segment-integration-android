@@ -60,10 +60,10 @@ public class TuneTest {
         logger = Logger.with(Analytics.LogLevel.DEBUG);
         when(Tune.init(context, "advertiser_id", "conversion_key", false)).thenReturn(tune);
         when(Tune.init(context, "advertiser_id", "conversion_key", true)).thenReturn(tune);
-        when(analytics.logger("Tune")).thenReturn(logger);
+        when(analytics.logger("MobileAppTracking")).thenReturn(logger);
         when(analytics.getApplication()).thenReturn(context);
 
-        integration = new TuneIntegration(context, "advertiser_id", "conversion_key", false, logger);
+        integration = new TuneIntegration(context, "advertiser_id", "conversion_key", false, "gcm_sender_id", logger);
     }
 
     @Test public void factory() {
@@ -78,6 +78,7 @@ public class TuneTest {
         assertThat(integration.advertiserId).isEqualTo("advertiser_id");
         assertThat(integration.conversionKey).isEqualTo("conversion_key");
         assertThat(integration.turnOnTMA).isFalse();
+        assertThat(integration.gcmSenderId).isNotEqualTo("gcm_sender_id");
         assertThat(integration.tune).isEqualTo(tune);
         assertThat(integration.tune).isNotNull();
     }
@@ -85,7 +86,8 @@ public class TuneTest {
     @Test public void initializeWithTMA() throws IllegalStateException {
         ValueMap settings = new ValueMap().putValue("advertiserId", "advertiser_id")
                 .putValue("conversionKey", "conversion_key")
-                .putValue("turnOnTMA", true);
+                .putValue("turnOnTMA", true)
+                .putValue("gcmSenderId", "gcm_sender_id");
 
         TuneIntegration integration =
                 (TuneIntegration) TuneIntegration.FACTORY.create(settings, analytics);
@@ -94,6 +96,7 @@ public class TuneTest {
         assertThat(integration.advertiserId).isEqualTo("advertiser_id");
         assertThat(integration.conversionKey).isEqualTo("conversion_key");
         assertThat(integration.turnOnTMA).isTrue();
+        assertThat(integration.gcmSenderId).isEqualTo("gcm_sender_id");
         assertThat(integration.tune).isEqualTo(tune);
         assertThat(integration.tune).isNotNull();
     }

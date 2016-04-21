@@ -2,6 +2,7 @@ package com.tune.segment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.segment.analytics.Analytics;
 import com.segment.analytics.ValueMap;
@@ -17,13 +18,14 @@ import com.tune.ma.application.TuneActivity;
  * Created by johng on 4/12/16.
  */
 public class TuneIntegration extends Integration<Tune> {
-    private static final String TUNE_KEY = "Tune";
+    private static final String TUNE_KEY = "MobileAppTracking";
     private Logger logger;
 
     final Tune tune;
     final String advertiserId;
     final String conversionKey;
     final boolean turnOnTMA;
+    final String gcmSenderId;
 
     public static final Factory FACTORY = new Factory() {
         @Override
@@ -32,8 +34,10 @@ public class TuneIntegration extends Integration<Tune> {
             Context context = analytics.getApplication();
             String advertiserId = settings.getString("advertiserId");
             String conversionKey = settings.getString("conversionKey");
-            boolean turnOnTMA = settings.getBoolean("turnOnTMA", false);
-            return new TuneIntegration(context, advertiserId, conversionKey, turnOnTMA, logger);
+            boolean turnOnTMA = settings.getBoolean("turnOnTMA", true);
+            //String gcmSenderId = "630875706334";
+            String gcmSenderId = settings.getString("gcmSenderId");
+            return new TuneIntegration(context, advertiserId, conversionKey, turnOnTMA, gcmSenderId, logger);
         }
 
         @Override
@@ -43,14 +47,21 @@ public class TuneIntegration extends Integration<Tune> {
     };
 
     public TuneIntegration(Context context, String advertiserId, String conversionKey,
-                           boolean turnOnTMA, Logger logger) {
+                           boolean turnOnTMA, String gcmSenderId, Logger logger) {
         this.logger = logger;
         logger.verbose("Initializing Tune Integration, advertiserId: %s, conversionKey: %s, " +
                 "turnOnTMA: %b", advertiserId, conversionKey, turnOnTMA);
         this.advertiserId = advertiserId;
         this.conversionKey = conversionKey;
         this.turnOnTMA = turnOnTMA;
+        this.gcmSenderId = gcmSenderId;
         this.tune = Tune.init(context, advertiserId, conversionKey, turnOnTMA);
+
+        if (this.turnOnTMA) {
+            if (!TextUtils.isEmpty(gcmSenderId)) {
+                this.tune.setPushNotificationSenderId(gcmSenderId);
+            }
+        }
         logger.verbose("TuneIntegration initialized.");
     }
 
