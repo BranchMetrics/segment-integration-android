@@ -1,4 +1,4 @@
-package com.tune.segment;
+package com.segment.analytics.android.integrations.tune;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,7 +35,6 @@ public class TuneIntegration extends Integration<Tune> {
             String advertiserId = settings.getString("advertiserId");
             String conversionKey = settings.getString("conversionKey");
             boolean turnOnTMA = settings.getBoolean("turnOnTMA", false);
-            //String gcmSenderId = "630875706334";
             String gcmSenderId = settings.getString("gcmSenderId");
             return new TuneIntegration(context, advertiserId, conversionKey, turnOnTMA, gcmSenderId, logger);
         }

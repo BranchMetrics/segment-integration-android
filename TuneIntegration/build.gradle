@@ -21,9 +21,7 @@ android {
 dependencies {
     provided 'com.segment.analytics.android:analytics:4.0.0'
 
-    //compile 'com.tune:tune-marketing-console-sdk:4.0.3'
-    compile project(':TuneMarketingConsoleSDK')
-    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.tune:tune-marketing-console-sdk:4.1.0'
 
     testCompile 'junit:junit:4.12'
     testCompile('org.robolectric:robolectric:3.0') {

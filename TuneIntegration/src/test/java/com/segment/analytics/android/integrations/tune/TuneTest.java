@@ -1,4 +1,4 @@
-package com.tune.segment;
+package com.segment.analytics.android.integrations.tune;
 
 import android.app.Activity;
 import android.app.Application;
