@@ -34,7 +34,7 @@ public class TuneIntegration extends Integration<Tune> {
             Context context = analytics.getApplication();
             String advertiserId = settings.getString("advertiserId");
             String conversionKey = settings.getString("conversionKey");
-            boolean turnOnTMA = settings.getBoolean("turnOnTMA", true);
+            boolean turnOnTMA = settings.getBoolean("turnOnTMA", false);
             //String gcmSenderId = "630875706334";
             String gcmSenderId = settings.getString("gcmSenderId");
             return new TuneIntegration(context, advertiserId, conversionKey, turnOnTMA, gcmSenderId, logger);
