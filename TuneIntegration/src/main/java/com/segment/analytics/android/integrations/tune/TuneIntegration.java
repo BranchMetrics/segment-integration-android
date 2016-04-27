@@ -116,8 +116,14 @@ public class TuneIntegration extends Integration<Tune> {
 
     @Override
     public void track(TrackPayload track) {
-        logger.verbose("TuneIntegration track: Calling TUNE measureEvent with %s", track.event());
-        TuneEvent event = new TuneEvent(track.event());
+        String eventName = track.event();
+        // Map Segment's "Completed Order" event to TUNE's "Purchase" event in order to record revenue
+        if (eventName.equals("Completed Order")) {
+            eventName = TuneEvent.PURCHASE;
+        }
+
+        logger.verbose("TuneIntegration track: Calling TUNE measureEvent with %s", eventName);
+        TuneEvent event = new TuneEvent(eventName);
         event.withRevenue(track.properties().revenue());
         event.withCurrencyCode(track.properties().currency());
         event.withAdvertiserRefId(track.properties().orderId());
