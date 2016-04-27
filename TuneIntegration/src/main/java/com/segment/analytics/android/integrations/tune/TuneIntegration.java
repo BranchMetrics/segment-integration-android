@@ -60,7 +60,7 @@ public class TuneIntegration extends Integration<Tune> {
     public TuneIntegration(Context context, String advertiserId, String conversionKey,
                            boolean turnOnTMA, String gcmSenderId, Logger logger) {
         this.logger = logger;
-        logger.verbose("Initializing Tune Integration, advertiserId: %s, conversionKey: %s", advertiserId, conversionKey);
+        logger.verbose("Initializing TuneIntegration, advertiserId: %s, conversionKey: %s", advertiserId, conversionKey);
         this.advertiserId = advertiserId;
         this.conversionKey = conversionKey;
         this.turnOnTMA = turnOnTMA;
@@ -85,7 +85,7 @@ public class TuneIntegration extends Integration<Tune> {
 
     @Override
     public void onActivityResumed(Activity activity) {
-        logger.verbose("TuneIntegration onActivityResumed: Calling Tune measureSession");
+        logger.verbose("TuneIntegration onActivityResumed: Calling TUNE measureSession");
         if (turnOnTMA) {
             TuneActivity.onResume(activity);
         }
@@ -107,7 +107,7 @@ public class TuneIntegration extends Integration<Tune> {
     // https://segment.com/docs/spec/.
     @Override
     public void identify(IdentifyPayload identify) {
-        logger.verbose("TuneIntegration identify: Setting Tune user identifiers");
+        logger.verbose("TuneIntegration identify: Setting TUNE user identifiers");
         tune.setUserId(identify.userId());
         tune.setPhoneNumber(identify.traits().phone());
         tune.setUserEmail(identify.traits().email());
@@ -116,7 +116,7 @@ public class TuneIntegration extends Integration<Tune> {
 
     @Override
     public void track(TrackPayload track) {
-        logger.verbose("TuneIntegration track: Calling Tune measureEvent with %s", track.event());
+        logger.verbose("TuneIntegration track: Calling TUNE measureEvent with %s", track.event());
         TuneEvent event = new TuneEvent(track.event());
         event.withRevenue(track.properties().revenue());
         event.withCurrencyCode(track.properties().currency());
@@ -129,7 +129,7 @@ public class TuneIntegration extends Integration<Tune> {
     // Reset is when you clear out any local user data.
     @Override
     public void reset() {
-        logger.verbose("TuneIntegration reset: Clearing Tune user identifiers");
+        logger.verbose("TuneIntegration reset: Clearing TUNE user identifiers");
         tune.setUserId(null);
         tune.setPhoneNumber(null);
         tune.setUserEmail(null);
