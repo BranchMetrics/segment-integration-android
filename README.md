@@ -1,4 +1,8 @@
 # TUNE Segment Integration for Android
+
+[ ![Download](https://api.bintray.com/packages/tune/TuneMarketingConsoleSDK/TuneSegmentIntegration/images/download.svg) ](https://bintray.com/tune/TuneMarketingConsoleSDK/TuneSegmentIntegration/_latestVersion)
+
+
 Segment integration for the TUNE Android SDK.
 
 ## Installation
