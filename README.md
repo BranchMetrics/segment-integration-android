@@ -6,7 +6,7 @@ To install the TUNE Segment integration, simply add these lines to your
 module's build.gradle file:
 ```groovy
 dependencies {
-  compile 'com.segment.analytics.android:analytics:4.0.4'
+  compile 'com.segment.analytics.android:analytics:4.+'
   compile 'com.tune:tune-segment-integration:1.0.0'
 }
 ```
