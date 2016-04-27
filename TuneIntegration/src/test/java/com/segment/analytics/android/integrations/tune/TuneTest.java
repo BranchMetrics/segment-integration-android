@@ -60,7 +60,7 @@ public class TuneTest {
         logger = Logger.with(Analytics.LogLevel.DEBUG);
         when(Tune.init(context, "advertiser_id", "conversion_key", false)).thenReturn(tune);
         when(Tune.init(context, "advertiser_id", "conversion_key", true)).thenReturn(tune);
-        when(analytics.logger("MobileAppTracking")).thenReturn(logger);
+        when(analytics.logger("TUNE")).thenReturn(logger);
         when(analytics.getApplication()).thenReturn(context);
 
         integration = new TuneIntegration(context, "advertiser_id", "conversion_key", false, "gcm_sender_id", logger);
