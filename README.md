@@ -29,23 +29,29 @@ Now you can use the Segment API to measure events with TUNE!
 
 ## Usage
 
-Measuring sessions and deeplinks with TUNE is automatically wired into Segment,
+### Installs and App Opens
+Measuring installs and app opens from deeplinks with TUNE is automatically wired into this integration,
 so you don't need to worry about adding anything for that.
 
-```java
-analytics.track();
-```
-will measure events with TUNE.
 
+### Identify Users
 ```java
 analytics.identify();
 ```
-will set user identifiers with TUNE.
+will set user identifiers in TUNE for `userId`, `email`, `phone`, and `username`.
 
 ```java
 analytics.reset();
 ```
-will reset user identifiers with TUNE.
+will reset any user identifiers set by `identify`.
+
+
+### Track Actions
+```java
+analytics.track();
+```
+will measure events in TUNE. If present, the `revenue`, `currency`, `orderId`, `productId`, and `category` fields will automatically
+map to corresponding fields for the event in TUNE.
 
 ## License
 See LICENSE file.
