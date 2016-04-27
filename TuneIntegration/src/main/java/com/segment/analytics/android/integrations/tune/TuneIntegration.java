@@ -36,6 +36,18 @@ public class TuneIntegration extends Integration<Tune> {
             String conversionKey = settings.getString("conversionKey");
             boolean turnOnTMA = settings.getBoolean("turnOnTMA", false);
             String gcmSenderId = settings.getString("gcmSenderId");
+
+            // Check that advertiserId, conversionKey were passed
+            if (TextUtils.isEmpty(advertiserId)) {
+                logger.info("Please add TUNE advertiser id in Segment settings.");
+                return null;
+            }
+
+            if (TextUtils.isEmpty(conversionKey)) {
+                logger.info("Please add TUNE conversion key in Segment settings.");
+                return null;
+            }
+
             return new TuneIntegration(context, advertiserId, conversionKey, turnOnTMA, gcmSenderId, logger);
         }
 
@@ -48,8 +60,7 @@ public class TuneIntegration extends Integration<Tune> {
     public TuneIntegration(Context context, String advertiserId, String conversionKey,
                            boolean turnOnTMA, String gcmSenderId, Logger logger) {
         this.logger = logger;
-        logger.verbose("Initializing Tune Integration, advertiserId: %s, conversionKey: %s, " +
-                "turnOnTMA: %b", advertiserId, conversionKey, turnOnTMA);
+        logger.verbose("Initializing Tune Integration, advertiserId: %s, conversionKey: %s", advertiserId, conversionKey);
         this.advertiserId = advertiserId;
         this.conversionKey = conversionKey;
         this.turnOnTMA = turnOnTMA;
