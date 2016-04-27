@@ -10,14 +10,29 @@ dependencies {
   compile 'com.tune:tune-segment-integration:1.0.0'
 }
 ```
-Please add at least the following permissions to your application's AndroidManifest.xml:
-```xml
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.INTERNET"/>
-```
 
 ## Setup
-Add the following lines to your Application:
+
+Add the following permissions to your application's AndroidManifest.xml:
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+```
+
+Add TUNE's referrer receiver to your AndroidManifest.xml inside your app's \<application\> tags:
+```xml
+<application>
+    ...
+    
+    <receiver android:name="com.tune.TuneTracker">
+        <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+    </receiver>
+</application>
+```
+
+Use the TuneIntegration factory when initializing Segment in your Application:
 
 ```java
 Analytics analytics = new Analytics.Builder(getApplicationContext(), "SEGMENT_WRITE_KEY")
@@ -25,7 +40,7 @@ Analytics analytics = new Analytics.Builder(getApplicationContext(), "SEGMENT_WR
     .build();
 ```
 
-Now you can use the Segment API to measure events with TUNE!
+Now you can use the Segment SDK to measure events with TUNE!
 
 ## Usage
 
