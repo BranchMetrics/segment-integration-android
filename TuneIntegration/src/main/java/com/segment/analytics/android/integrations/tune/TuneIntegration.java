@@ -18,7 +18,7 @@ import com.tune.ma.application.TuneActivity;
  * Created by johng on 4/12/16.
  */
 public class TuneIntegration extends Integration<Tune> {
-    private static final String TUNE_KEY = "MobileAppTracking";
+    private static final String TUNE_KEY = "TUNE";
     private Logger logger;
 
     final Tune tune;
