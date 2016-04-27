@@ -53,7 +53,8 @@ so you don't need to worry about adding anything for that.
 ```java
 analytics.identify();
 ```
-will set user identifiers in TUNE for `userId`, `email`, `phone`, and `username`.
+will set `user id` in TUNE. If present, the `email`, `phone`, and `username` fields will automatically set corresponding user identifier
+fields in TUNE, to be sent with any future events.
 
 ```java
 analytics.reset();
