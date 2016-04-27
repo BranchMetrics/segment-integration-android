@@ -16,18 +16,18 @@ Please add at least the following permissions to your application's AndroidManif
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
-## Usage
+## Setup
 Add the following lines to your Application:
 
 ```java
-private static final String SEGMENT_WRITE_KEY = " ... ";
-
 Analytics analytics = new Analytics.Builder(getApplicationContext(), "SEGMENT_WRITE_KEY")
     .use(TuneIntegration.FACTORY)
     .build();
 ```
 
 Now you can use the Segment API to measure events with TUNE!
+
+## Usage
 
 Measuring sessions and deeplinks with TUNE is automatically wired into Segment,
 so you don't need to worry about adding anything for that.
@@ -41,6 +41,11 @@ will measure events with TUNE.
 analytics.identify();
 ```
 will set user identifiers with TUNE.
+
+```java
+analytics.reset();
+```
+will reset user identifiers with TUNE.
 
 ## License
 See LICENSE file.
