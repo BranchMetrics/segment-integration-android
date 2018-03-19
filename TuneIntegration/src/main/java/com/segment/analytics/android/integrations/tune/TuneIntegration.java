@@ -76,28 +76,18 @@ public class TuneIntegration extends Integration<Tune> {
     }
 
     @Override
-    public void onActivityStarted(Activity activity) {
-        logger.verbose("TuneIntegration onActivityStarted");
-        if (turnOnTMA) {
-            TuneActivity.onStart(activity);
-        }
-    }
-
-    @Override
     public void onActivityResumed(Activity activity) {
         logger.verbose("TuneIntegration onActivityResumed: Calling TUNE measureSession");
         if (turnOnTMA) {
             TuneActivity.onResume(activity);
         }
-        tune.setReferralSources(activity);
-        tune.measureSession();
     }
 
     @Override
-    public void onActivityStopped(Activity activity) {
-        logger.verbose("TuneIntegration onActivityStopped");
+    public void onActivityPaused(Activity activity) {
+        logger.verbose("TuneIntegration onActivityPaused");
         if (turnOnTMA) {
-            TuneActivity.onStop(activity);
+            TuneActivity.onPause(activity);
         }
     }
 
