@@ -2,6 +2,7 @@ package com.segment.analytics.android.integrations.tune;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.segment.analytics.Analytics;
@@ -80,6 +81,17 @@ public class TuneIntegration extends Integration<Tune> {
         logger.verbose("TuneIntegration onActivityResumed: Calling TUNE measureSession");
         if (turnOnTMA) {
             TuneActivity.onResume(activity);
+        } else {
+            Intent intent = activity.getIntent();
+            if (Tune.getInstance() != null && intent != null) {
+                if (null != intent.getDataString()) {
+                    String uriString = intent.getDataString();
+                    Tune.getInstance().setReferralCallingPackage(activity.getCallingPackage());
+                    Tune.getInstance().setReferralUrl(uriString);
+                }
+
+                Tune.getInstance().measureSessionInternal();
+            }
         }
     }
 
