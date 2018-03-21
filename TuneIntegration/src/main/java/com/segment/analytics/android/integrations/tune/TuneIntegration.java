@@ -2,7 +2,6 @@ package com.segment.analytics.android.integrations.tune;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
 
 import com.segment.analytics.Analytics;
@@ -78,29 +77,14 @@ public class TuneIntegration extends Integration<Tune> {
 
     @Override
     public void onActivityResumed(Activity activity) {
-        logger.verbose("TuneIntegration onActivityResumed: Calling TUNE measureSession");
-        if (turnOnTMA) {
-            TuneActivity.onResume(activity);
-        } else {
-            Intent intent = activity.getIntent();
-            if (Tune.getInstance() != null && intent != null) {
-                if (null != intent.getDataString()) {
-                    String uriString = intent.getDataString();
-                    Tune.getInstance().setReferralCallingPackage(activity.getCallingPackage());
-                    Tune.getInstance().setReferralUrl(uriString);
-                }
-
-                Tune.getInstance().measureSessionInternal();
-            }
-        }
+        logger.verbose("TuneIntegration onActivityResumed");
+        TuneActivity.onResume(activity);
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
         logger.verbose("TuneIntegration onActivityPaused");
-        if (turnOnTMA) {
-            TuneActivity.onPause(activity);
-        }
+        TuneActivity.onPause(activity);
     }
 
     // These are messages in the format of the Segment API.

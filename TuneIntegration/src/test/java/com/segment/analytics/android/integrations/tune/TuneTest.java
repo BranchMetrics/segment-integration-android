@@ -104,8 +104,7 @@ public class TuneTest {
     @Test public void activityResume() {
         // Enable TMA to check for TuneActivity
         ValueMap settings = new ValueMap().putValue("advertiserId", "advertiser_id")
-                .putValue("conversionKey", "conversion_key")
-                .putValue("turnOnTMA", true);
+                .putValue("conversionKey", "conversion_key");
 
         TuneIntegration integration =
                 (TuneIntegration) TuneIntegration.FACTORY.create(settings, analytics);
@@ -119,12 +118,10 @@ public class TuneTest {
         TuneActivity.onResume(activity);
     }
 
-
     @Test public void activityPause() {
         // Enable TMA to check for TuneActivity
         ValueMap settings = new ValueMap().putValue("advertiserId", "advertiser_id")
-                .putValue("conversionKey", "conversion_key")
-                .putValue("turnOnTMA", true);
+                .putValue("conversionKey", "conversion_key");
 
         TuneIntegration integration =
                 (TuneIntegration) TuneIntegration.FACTORY.create(settings, analytics);
