@@ -101,27 +101,10 @@ public class TuneTest {
         assertThat(integration.tune).isNotNull();
     }
 
-    @Test public void activityStart() {
-        // Enable TMA to check for TuneActivity
-        ValueMap settings = new ValueMap().putValue("advertiserId", "advertiser_id")
-                .putValue("conversionKey", "conversion_key")
-                .putValue("turnOnTMA", true);
-
-        TuneIntegration integration =
-                (TuneIntegration) TuneIntegration.FACTORY.create(settings, analytics);
-
-        Activity activity = mock(Activity.class);
-        integration.onActivityStarted(activity);
-
-        verifyStatic();
-        TuneActivity.onStart(activity);
-    }
-
     @Test public void activityResume() {
         // Enable TMA to check for TuneActivity
         ValueMap settings = new ValueMap().putValue("advertiserId", "advertiser_id")
-                .putValue("conversionKey", "conversion_key")
-                .putValue("turnOnTMA", true);
+                .putValue("conversionKey", "conversion_key");
 
         TuneIntegration integration =
                 (TuneIntegration) TuneIntegration.FACTORY.create(settings, analytics);
@@ -129,27 +112,25 @@ public class TuneTest {
         Activity activity = mock(Activity.class);
         integration.onActivityResumed(activity);
 
-        verify(tune).setReferralSources(activity);
-        verify(tune).measureSession();
         verifyNoMoreTuneInteractions();
 
         verifyStatic();
         TuneActivity.onResume(activity);
     }
 
-    @Test public void activityStop() {
+    @Test public void activityPause() {
         // Enable TMA to check for TuneActivity
         ValueMap settings = new ValueMap().putValue("advertiserId", "advertiser_id")
-                .putValue("conversionKey", "conversion_key")
-                .putValue("turnOnTMA", true);
+                .putValue("conversionKey", "conversion_key");
 
         TuneIntegration integration =
                 (TuneIntegration) TuneIntegration.FACTORY.create(settings, analytics);
 
         Activity activity = mock(Activity.class);
-        integration.onActivityStopped(activity);
+        integration.onActivityPaused(activity);
+
         verifyStatic();
-        TuneActivity.onStop(activity);
+        TuneActivity.onPause(activity);
     }
 
     @Test public void track() throws Exception {

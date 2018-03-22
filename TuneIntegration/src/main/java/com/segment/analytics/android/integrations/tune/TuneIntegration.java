@@ -76,29 +76,15 @@ public class TuneIntegration extends Integration<Tune> {
     }
 
     @Override
-    public void onActivityStarted(Activity activity) {
-        logger.verbose("TuneIntegration onActivityStarted");
-        if (turnOnTMA) {
-            TuneActivity.onStart(activity);
-        }
-    }
-
-    @Override
     public void onActivityResumed(Activity activity) {
-        logger.verbose("TuneIntegration onActivityResumed: Calling TUNE measureSession");
-        if (turnOnTMA) {
-            TuneActivity.onResume(activity);
-        }
-        tune.setReferralSources(activity);
-        tune.measureSession();
+        logger.verbose("TuneIntegration onActivityResumed");
+        TuneActivity.onResume(activity);
     }
 
     @Override
-    public void onActivityStopped(Activity activity) {
-        logger.verbose("TuneIntegration onActivityStopped");
-        if (turnOnTMA) {
-            TuneActivity.onStop(activity);
-        }
+    public void onActivityPaused(Activity activity) {
+        logger.verbose("TuneIntegration onActivityPaused");
+        TuneActivity.onPause(activity);
     }
 
     // These are messages in the format of the Segment API.
