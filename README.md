@@ -11,7 +11,7 @@ module's build.gradle file:
 ```groovy
 dependencies {
   compile 'com.segment.analytics.android:analytics:4.+'
-  compile 'com.tune:tune-segment-integration:1.0.0'
+  compile 'com.tune:tune-segment-integration:1.1.0'
 }
 ```
 
@@ -27,7 +27,7 @@ Add TUNE's referrer receiver to your AndroidManifest.xml inside your app's \<app
 ```xml
 <application>
     ...
-    
+
     <receiver android:name="com.tune.TuneTracker">
         <intent-filter>
             <action android:name="com.android.vending.INSTALL_REFERRER" />
